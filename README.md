@@ -6,4 +6,4 @@ The goal is to create a solid DSA foundation for coding interviews and competiti
 Each folder contains topic-wise solutions with clean code and meaningful file names.  
 🚀 Keep learning, keep grinding — and Happy Coding! 
 
-Made with ❤ by Areeb Ahmed
+Made with ❤ by Areeb 
