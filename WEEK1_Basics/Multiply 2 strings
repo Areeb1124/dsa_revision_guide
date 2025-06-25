@@ -1,0 +1,54 @@
+class Solution {
+  public:
+    /*You are required to complete below function */
+    string multiplyStrings(string& s1, string& s2) {
+        // Your code here
+        bool isNegative=false;
+        if(s1[0]=='-'){
+            isNegative=!isNegative;
+            s1=s1.substr(1);
+        }
+         if(s2[0]=='-'){
+            isNegative=!isNegative;
+            s2=s2.substr(1);
+        }
+        while(s1.length()>0&&s1[0]=='0'){
+            s1=s1.substr(1);
+        }
+        while(s2.length()>0&&s2[0]=='0'){
+            s2=s2.substr(1);
+        }
+       if(s1.empty()||s2.empty()){
+           return "0";
+       }
+        int n=s1.length();
+        int m=s2.length();
+        vector<int> result(n+m,0);
+        for(int i=n-1;i>=0;i--){
+            for(int j=m-1;j>=0;j--){
+              int d1=s1[i]-'0';
+              int d2=s2[j]-'0';
+              int mult=d1*d2;
+              int p1=i+j;
+              int p2=i+j+1;
+              int sum=mult + result[p2];
+              result[p2]=sum%10;
+              result[p1]+=sum/10;
+              
+            }
+        }
+        string ans="";
+        bool leading=true;
+        for(int i=0;i<n+m;i++){
+            if(leading&&result[i]==0){
+                continue;
+            }
+            leading=false;
+            ans+=result[i]+'0';
+        }
+        if(isNegative){
+            return "-" + ans;
+        }
+        return ans;
+    }
+};
