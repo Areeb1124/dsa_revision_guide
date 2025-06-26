@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+        if(s.length()!=t.length()){
+            return false;
+        }
+        char sToT[128];
+        char tToS[128];
+        // Initialize with 0 (no mapping created yet)
+        for(int i=0;i<128;i++){
+            sToT[i]=0;
+            tToS[i]=0;
+        }
+
+        for(int i=0;i<s.length();i++){
+            char ch1=s[i];
+            char ch2=t[i];
+
+           //Check forward mapping
+            if(sToT[ch1]!=0){
+               // check if it maps to same character
+                if(sToT[ch1]!=ch2){
+                    return false;//ch1 trying to map different character
+                }
+
+            }else{
+                sToT[ch1]=ch2; //first time seeing,create mapping
+            }
+
+             //Check backward mapping
+              if(tToS[ch2]!=0){
+                //check if it maps to same character
+                if(tToS[ch2]!=ch1){
+                    return false;// ch2 trying to map  different character
+                }
+
+            }else{
+                tToS[ch2]=ch1;//first time seeing,create mapping
+            }
+
+        }
+        return true;
+    }
+};
