@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        int length1=s1.size();
+        int length2=s2.size();
+        for(int i=0;i<=length2-length1;i++){
+            string sub=s2.substr(i,length1);
+            string temp1=s1;
+            string temp2=sub;
+
+            sort(temp1.begin(),temp1.end());
+            sort(temp2.begin(),temp2.end());
+
+            if(temp1 == temp2){
+                return true;
+            }
+        }
+        return false;
+
+        
+    }
+};
