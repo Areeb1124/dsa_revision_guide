@@ -1,0 +1,27 @@
+class Solution {
+  public:
+    int minSwap(vector<int>& arr, int k) {
+        // code here
+        int windowSize=0;
+        int n=arr.size();
+        for(int i=0;i<n;i++){
+            if(arr[i]<=k){
+                windowSize++;
+            }
+        }
+        
+        int minCount=n;
+        for(int start=0;start<=n-windowSize;start++){
+            int badCount=0;
+            for(int i=start;i<start+windowSize;i++){
+                 if(arr[i]>k){
+                     badCount++;
+                 }
+            }
+            if(badCount<minCount){
+                minCount=badCount;
+            }
+        }
+        return minCount;
+    }
+};
