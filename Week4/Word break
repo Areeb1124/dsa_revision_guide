@@ -1,0 +1,19 @@
+class Solution {
+public:
+bool wordBreak(string s,unordered_set<string>& set){
+    if(s.size() == 0){
+        return true;
+    }
+    for(int i=0;i<s.size();i++){
+        if(set.count(s.substr(0,i+1)) && wordBreak(s.substr(i+1),set)){
+            return true;
+        }
+    }
+    return false;
+}
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> set(wordDict.begin(),wordDict.end());
+        return wordBreak(s,set);
+        
+    }
+};
