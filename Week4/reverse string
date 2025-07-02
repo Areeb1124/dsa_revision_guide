@@ -1,0 +1,15 @@
+class Solution {
+public:
+void reverseHelper(vector<char>& s,int start,int end){
+    //base case
+    if(start>=end){
+        return;
+    }
+    swap(s[start],s[end]);
+    reverseHelper(s,start+1,end-1);
+}
+    void reverseString(vector<char>& s) {
+       reverseHelper(s,0,s.size()-1);
+
+    }
+};
