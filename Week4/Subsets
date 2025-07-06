@@ -1,0 +1,25 @@
+class Solution {
+public:
+void generate(int index,vector<int>& nums,vector<int>& current, vector<vector<int>>& result){
+    if(index == nums.size()){
+        result.push_back(current);
+        return;
+    }
+
+    current.push_back(nums[index]);
+    generate(index+1,nums,current,result);
+
+    //backtrack
+    current.pop_back();
+    generate(index+1,nums,current,result);
+
+}
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<vector<int>> result;
+        vector<int> current;
+        sort(nums.begin(),nums.end());
+        generate(0,nums,current,result);
+        sort(result.begin(),result.end());
+        return result;  
+    }
+};
