@@ -1,0 +1,22 @@
+class Solution {
+public:
+void helper(vector<int>& nums,int idx,set<vector<int>>& result){
+    //base case
+    if(idx == nums.size()){
+        result.insert(nums);
+        return;
+    }
+    for(int i=idx;i<nums.size();i++){
+        swap(nums[i],nums[idx]);
+        helper(nums,idx+1,result);
+        swap(nums[i],nums[idx]);
+
+    }
+}
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        set<vector<int>> result;
+        helper(nums,0,result);
+        return vector<vector<int>>(result.begin(),result.end());
+        
+    }
+};
