@@ -1,0 +1,26 @@
+class Solution {
+public:
+void generate(int index,vector<int>& nums,vector<int>& current, vector<vector<int>>& result){
+     if(index == nums.size()){
+        result.push_back(current);
+        return;
+     }
+     current.push_back(nums[index]);
+     generate(index+1,nums,current,result);
+
+     //backtrack
+     current.pop_back();
+     while(index+1<nums.size() && nums[index]==nums[index+1]){
+        index++;
+     }
+     generate(index+1,nums,current,result);
+}
+    vector<vector<int>> subsetsWithDup(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(),nums.end());
+        vector<int> current;
+        generate(0,nums,current,result);
+        return result;
+        
+    }
+};
