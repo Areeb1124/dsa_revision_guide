@@ -1,0 +1,25 @@
+class Solution {
+public:
+int atmost(vector<int>& nums,int goal){
+    int l=0,r=0,sum=0,count=0;
+    while(r<nums.size()){
+        sum+=nums[r];
+        while(sum>goal){
+            sum-=nums[l];
+            l++;
+        }
+        count+=r-l+1;
+        r++;
+    }
+    return count;
+}
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        int n=nums.size();
+        vector<int>binary(n);
+        for(int i=0;i<n;i++){
+            binary[i]=nums[i]%2;
+        }
+       return atmost(binary,k) - atmost(binary,k-1);
+        
+    }
+};
