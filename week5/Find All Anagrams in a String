@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        if(s.length()<p.length()){
+            return {};
+        }
+        vector<int>p_count(26,0);
+        vector<int>window_count(26,0);
+
+        for(int i=0;i<p.length();i++){
+            p_count[p[i]-'a']++;
+        }
+
+        int left=0,right=0;
+        vector<int> result;
+        while(right<s.size()){
+            window_count[s[right]-'a']++;
+            while(right-left+1>p.length()){
+                window_count[s[left]-'a']--;
+                left++;
+            }
+            if(right-left+1 == p.length()){
+                if(p_count == window_count){
+                    result.push_back(left);
+                }
+            }
+            right++;
+        }
+        return result;
+        
+    }
+};
