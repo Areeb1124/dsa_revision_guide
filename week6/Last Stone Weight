@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int lastStoneWeight(vector<int>& stones) {
+        //implemented using stack
+         stack<int>stk;
+         for(int i=0;i<stones.size();i++){
+            stk.push(stones[i]);
+         }
+         while(stk.size()>1){
+            vector<int> temp;
+              while(!stk.empty()){
+                temp.push_back(stk.top());
+                stk.pop();
+              }
+              sort(temp.begin(),temp.end());
+              int heaviest=temp.back();
+              temp.pop_back();
+              int secondHeaviest=temp.back();
+              temp.pop_back();
+              if(heaviest!=secondHeaviest){
+                temp.push_back(heaviest-secondHeaviest);
+              }
+              for(int i=0;i<temp.size();i++){
+                stk.push(temp[i]);
+              }
+
+         }
+         if(stk.empty()){
+            return 0;
+         } else{
+           return stk.top();
+         }
+        
+    }
+};
