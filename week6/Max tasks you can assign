@@ -1,0 +1,50 @@
+class Solution {
+public:
+    bool tasksAssign(int mid,vector<int>& tasks, vector<int>& workers, int pills, int strength){
+        deque<int>available_workers(workers.end()-mid,workers.end());
+        // int currentTask;
+        for(int i=mid-1;i>=0;i--){
+            int currentTask=tasks[i];
+            if(available_workers.back()>=currentTask){
+                available_workers.pop_back();
+            }
+            else{
+                if(pills<=0){
+                    return false;
+                }
+                bool found=false;
+                int min_strength=currentTask-strength;
+                for(int j=0;j<available_workers.size();j++){
+                    if(available_workers[j]>=min_strength){
+                       available_workers.erase(available_workers.begin()+j);
+                        found=true;
+                        break;
+                    }
+                }
+                  if(!found){
+                        return false;
+                    }
+                    pills--;
+            }
+        }
+        return true;
+    }
+    int maxTaskAssign(vector<int>& tasks, vector<int>& workers, int pills, int strength) {
+        sort(tasks.begin(),tasks.end());
+        sort(workers.begin(),workers.end());
+        int low=0;
+        int high=min(tasks.size(),workers.size());
+        int result=0;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            if(tasksAssign(mid,tasks,workers,pills,strength)){
+                result=mid;
+                low=mid+1;
+            }else{
+                high=mid-1;
+            }
+        }
+        return result;
+        
+    }
+};
