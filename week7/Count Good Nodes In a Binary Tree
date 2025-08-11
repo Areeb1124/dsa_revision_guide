@@ -1,0 +1,30 @@
+class Solution {
+public:
+int Search(TreeNode* curr,int max){
+    if(!curr){
+        return 0;
+    }
+    int count=0;
+    if(curr->val>=max){
+        count++;
+        max=curr->val;
+    }
+    count+=Search(curr->left,max);
+    count+=Search(curr->right,max);
+    return count;
+}
+    int goodNodes(TreeNode* root) {
+        if(!root){
+            return 0;
+        }
+        if(!root->left && !root->right){
+            return 1;
+        }
+        int goodNodes=1;
+        goodNodes+=Search(root->left,root->val);
+        goodNodes+=Search(root->right,root->val);
+        return goodNodes;
+
+        
+    }
+};
