@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int countNodes(TreeNode* root) {
+    if(root == NULL){
+        return 0;
+    }   
+     int lh=countLeftNodes(root);
+     int rh=countRightNodes(root);
+     if(lh == rh){
+        return (1<<lh)-1;
+     }
+     return 1+ countNodes(root->left) + countNodes(root->right);
+    }
+    int countLeftNodes(TreeNode* node){
+        int height=0;
+        while(node){
+            height++;
+           node= node->left;
+        }
+        return height;
+    }
+      int countRightNodes(TreeNode* node){
+        int height=0;
+        while(node){
+            height++;
+           node= node->right;
+        }
+        return height;
+    }
+};
