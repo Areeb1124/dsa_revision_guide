@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> rearrangeBarcodes(vector<int>& barcodes) {
+        //greedy approach
+        int n=barcodes.size();
+        map<int,int>dict;
+        for(int i=0;i<n;i++){
+           dict[barcodes[i]]++;
+        }
+        int maxFreq=0,num;
+        for(const auto& it:dict){
+            if(it.second>maxFreq){
+                maxFreq=it.second;
+                num=it.first;
+            }
+        }
+         vector<int>result(n,0);
+         int idx=0;
+         for(int i=0;i<maxFreq;i++){
+              result[idx]=num;
+              idx+=2;
+         }
+         dict.erase(num);
+         for(const auto& it:dict){
+            maxFreq=it.second;
+            num=it.first;
+            for(int i=0;i<maxFreq;i++){
+                if(idx>=n){
+                    idx=1;
+                }
+                result[idx]=num;
+                idx+=2;
+            }
+
+         }
+         return result;
+    }
+};
