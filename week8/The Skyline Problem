@@ -1,0 +1,36 @@
+class Solution {
+public:
+    vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
+        //using map
+         vector<vector<int>> result;
+         vector<pair<int,int>>criticalPoints;
+         for(int i=0;i<buildings.size();i++){
+            criticalPoints.push_back({buildings[i][0],-buildings[i][2]});
+            criticalPoints.push_back({buildings[i][1],buildings[i][2]});
+         }
+         sort(criticalPoints.begin(),criticalPoints.end());
+         map<int,int>mpp;
+         mpp[0]++;
+         int previousHeight=0;
+         for(auto it:criticalPoints){
+            int x=it.first;
+            int height=it.second;
+            // int maxHeight=0;
+            if(height<0){
+             mpp[-height]++;
+            }else{
+               mpp[height]--;
+               if(mpp[height]==0){
+                mpp.erase(height);
+               }
+            }
+           int maxHeight=mpp.rbegin()->first;
+            if(maxHeight!=previousHeight){
+               result.push_back({x,maxHeight});
+               previousHeight=maxHeight;       
+            }
+         }
+         return result;
+        
+    }
+};
